@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Services</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#1F6F54}a:hover{color:#14463A}
+</style>
+</helmet>
+<div style="display: flex; flex-wrap: wrap; min-height: 920px; background: #F6F7F5; color: #14201C; font-family: 'Inter', system-ui, sans-serif">
+<nav style="flex: 0 0 232px; box-sizing: border-box; background: #FFFFFF; border-right: 1px solid #E3E7E3; padding: 24px 16px; display: flex; flex-direction: column; gap: 4px">
+<div style="display: flex; align-items: center; gap: 10px; padding: 0 8px 20px">
+<div style="width: 36px; height: 36px; border-radius: 8px; background: #1F6F54; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px">T</div>
+<div style="display: flex; flex-direction: column"><span style="font-weight: 700; font-size: 15px">Tawi</span><span style="font-size: 12px; color: #4A5750">Admin</span></div>
+</div>
+<a href="Main.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; color: #3C4A44; text-decoration: none; font-size: 15px; font-weight: 500">Dashboard</a>
+<a href="Inbox.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; color: #3C4A44; text-decoration: none; font-size: 15px; font-weight: 500">Inbox</a>
+<a href="Founders.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; color: #3C4A44; text-decoration: none; font-size: 15px; font-weight: 500">Founders</a>
+<a href="Services.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; background: #E4F0EA; color: #14463A; text-decoration: none; font-size: 15px; font-weight: 600">Services</a>
+<a href="Customers.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; color: #3C4A44; text-decoration: none; font-size: 15px; font-weight: 500">Customers</a>
+<a href="Settings.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; color: #3C4A44; text-decoration: none; font-size: 15px; font-weight: 500">Settings</a>
+</nav>
+<main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 32px 40px; display: flex; flex-direction: column; gap: 24px">
+<header style="display: flex; flex-direction: column; gap: 4px">
+<h1 style="margin: 0; font-size: 28px; font-weight: 700">Services</h1>
+<span style="font-size: 15px; color: #4A5750">The list of what Tawi offers. Add, rename, change the status or remove any service.</span>
+</header>
+<section style="box-sizing: border-box; background: #FFFFFF; border: 1px solid #E3E7E3; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">Add a service</h2>
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px">
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 6px">
+<label for="new-service" style="font-size: 14px; font-weight: 500">Service name</label>
+<input id="new-service" type="text" value="{{newName}}" onInput="{{onNewName}}" placeholder="For example: Social media management" style="height: 44px; box-sizing: border-box; padding: 0 12px; border: 1px solid #8C9A92; border-radius: 8px; font-size: 15px; font-family: inherit">
+</div>
+<button type="button" onClick="{{addService}}" style="height: 44px; padding: 0 20px; border: 0; border-radius: 8px; background: #1F6F54; color: #FFFFFF; font-size: 14px; font-weight: 600; font-family: inherit">Add service</button>
+</div>
+</section>
+<section style="box-sizing: border-box; background: #FFFFFF; border: 1px solid #E3E7E3; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 8px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 600; padding-bottom: 8px">All services</h2>
+<sc-for list="{{rows}}" as="s" hint-placeholder-count="5">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px; padding: 14px 0; border-top: 1px solid #EEF1EE">
+<div style="flex: 2 1 200px; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+<label style="font-size: 13px; color: #4A5750">Name<input type="text" value="{{s.name}}" onInput="{{s.onName}}" style="display: block; width: 100%; margin-top: 6px; height: 44px; box-sizing: border-box; padding: 0 12px; border: 1px solid #B8C2BC; border-radius: 8px; font-size: 15px; font-family: inherit; color: #14201C"></label>
+</div>
+<div style="flex: 3 1 260px; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+<label style="font-size: 13px; color: #4A5750">Description<input type="text" value="{{s.note}}" onInput="{{s.onNote}}" placeholder="One line about the service" style="display: block; width: 100%; margin-top: 6px; height: 44px; box-sizing: border-box; padding: 0 12px; border: 1px solid #B8C2BC; border-radius: 8px; font-size: 15px; font-family: inherit; color: #14201C"></label>
+</div>
+<div style="flex: 0 0 150px; display: flex; flex-direction: column; gap: 6px">
+<label style="font-size: 13px; color: #4A5750">Status<select value="{{s.status}}" onChange="{{s.onStatus}}" style="display: block; width: 100%; margin-top: 6px; height: 44px; box-sizing: border-box; padding: 0 10px; border: 1px solid #B8C2BC; border-radius: 8px; font-size: 15px; font-family: inherit; background: #FFFFFF; color: #14201C">
+<option value="Idea">Idea</option>
+<option value="Demo">Demo</option>
+<option value="Pilot">Pilot</option>
+<option value="Live">Live</option>
+<option value="Paused">Paused</option>
+</select></label>
+</div>
+<button type="button" onClick="{{s.onRemove}}" aria-label="Remove service" style="height: 44px; padding: 0 16px; border: 1px solid #B8C2BC; border-radius: 8px; background: #FFFFFF; color: #8A2A1F; font-size: 14px; font-weight: 600; font-family: inherit">Remove</button>
+</div>
+</sc-for>
+<sc-if value="{{isEmpty}}" hint-placeholder-val="{{ false }}">
+<span style="font-size: 15px; color: #4A5750; padding: 12px 0">No services yet. Add the first one above.</span>
+</sc-if>
+</section>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1360,"height":920}}'>
+class Component extends DCLogic {
+constructor(...args) {
+super(...args);
+this.state = {
+newName: '',
+services: [
+{ name: 'QR digital menus', note: 'Mobile-friendly menus for restaurants and hotels, opened with a QR code.', status: 'Idea' },
+{ name: 'Website development', note: 'Websites and landing pages for businesses and individuals.', status: 'Idea' },
+{ name: 'AI-assisted business solutions', note: 'Helping businesses use AI tools in their workflows.', status: 'Idea' },
+{ name: 'Digital business cards', note: 'QR-enabled digital profiles for sharing business details.', status: 'Idea' },
+{ name: 'Promotional video and content', note: 'Short promo videos and social media content.', status: 'Idea' }
+]
+};
+}
+change(i, key, value) {
+const next = this.state.services.map((s, j) => (j === i ? { ...s, [key]: value } : s));
+this.setState({ services: next });
+}
+renderVals() {
+const list = this.state.services;
+return {
+newName: this.state.newName,
+onNewName: (e) => this.setState({ newName: e.target.value }),
+addService: () => {
+const name = this.state.newName.trim();
+if (!name) return;
+this.setState({ services: [...this.state.services, { name: name, note: '', status: 'Idea' }], newName: '' });
+},
+isEmpty: list.length === 0,
+rows: list.map((s, i) => ({
+name: s.name,
+note: s.note,
+status: s.status,
+onName: (e) => this.change(i, 'name', e.target.value),
+onNote: (e) => this.change(i, 'note', e.target.value),
+onStatus: (e) => this.change(i, 'status', e.target.value),
+onRemove: () => this.setState({ services: this.state.services.filter((x, j) => j !== i) })
+}))
+};
+}
+}
+</script>
+</body>
+</html>

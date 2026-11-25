@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Settings</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#1F6F54}a:hover{color:#14463A}
+</style>
+</helmet>
+<div style="display: flex; flex-wrap: wrap; min-height: 900px; background: #F6F7F5; color: #14201C; font-family: 'Inter', system-ui, sans-serif">
+<nav style="flex: 0 0 232px; box-sizing: border-box; background: #FFFFFF; border-right: 1px solid #E3E7E3; padding: 24px 16px; display: flex; flex-direction: column; gap: 4px">
+<div style="display: flex; align-items: center; gap: 10px; padding: 0 8px 20px">
+<div style="width: 36px; height: 36px; border-radius: 8px; background: #1F6F54; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px">T</div>
+<div style="display: flex; flex-direction: column"><span style="font-weight: 700; font-size: 15px">Tawi</span><span style="font-size: 12px; color: #4A5750">Admin</span></div>
+</div>
+<a href="Main.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; color: #3C4A44; text-decoration: none; font-size: 15px; font-weight: 500">Dashboard</a>
+<a href="Inbox.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; color: #3C4A44; text-decoration: none; font-size: 15px; font-weight: 500">Inbox</a>
+<a href="Founders.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; color: #3C4A44; text-decoration: none; font-size: 15px; font-weight: 500">Founders</a>
+<a href="Services.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; color: #3C4A44; text-decoration: none; font-size: 15px; font-weight: 500">Services</a>
+<a href="Customers.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; color: #3C4A44; text-decoration: none; font-size: 15px; font-weight: 500">Customers</a>
+<a href="Settings.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; background: #E4F0EA; color: #14463A; text-decoration: none; font-size: 15px; font-weight: 600">Settings</a>
+</nav>
+<main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 32px 40px; display: flex; flex-direction: column; gap: 24px">
+<header style="display: flex; flex-direction: column; gap: 4px">
+<h1 style="margin: 0; font-size: 28px; font-weight: 700">Settings</h1>
+<span style="font-size: 15px; color: #4A5750">Company details, who can sign in, and the record of roles and ownership.</span>
+</header>
+<section style="box-sizing: border-box; background: #FFFFFF; border: 1px solid #E3E7E3; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">Company details</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 6px">
+<label for="s-name" style="font-size: 14px; font-weight: 500">Company name</label>
+<input id="s-name" type="text" value="Tawi Digital Solutions" style="height: 44px; box-sizing: border-box; padding: 0 12px; border: 1px solid #8C9A92; border-radius: 8px; font-size: 15px; font-family: inherit">
+</div>
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 6px">
+<label for="s-tag" style="font-size: 14px; font-weight: 500">Tagline</label>
+<input id="s-tag" type="text" value="Practical digital solutions. Built together." style="height: 44px; box-sizing: border-box; padding: 0 12px; border: 1px solid #8C9A92; border-radius: 8px; font-size: 15px; font-family: inherit">
+</div>
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 6px">
+<label for="s-mail" style="font-size: 14px; font-weight: 500">Public contact email</label>
+<input id="s-mail" type="email" placeholder="hello@example.com" style="height: 44px; box-sizing: border-box; padding: 0 12px; border: 1px solid #8C9A92; border-radius: 8px; font-size: 15px; font-family: inherit">
+</div>
+</div>
+<div>
+<button type="button" style="height: 44px; padding: 0 20px; border: 0; border-radius: 8px; background: #1F6F54; color: #FFFFFF; font-size: 14px; font-weight: 600; font-family: inherit">Save details</button>
+</div>
+</section>
+<section style="box-sizing: border-box; background: #FFFFFF; border: 1px solid #E3E7E3; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 8px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">Roles and ownership</h2>
+<span style="font-size: 14px; color: #4A5750; padding-bottom: 8px">A record of what was agreed. Fill it in once the founders have decided.</span>
+<sc-for list="{{people}}" as="p" hint-placeholder-count="4">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px; padding: 12px 0; border-top: 1px solid #EEF1EE">
+<div style="flex: 1 1 200px; min-width: 0; font-size: 15px; font-weight: 600; padding-bottom: 12px">{{p.label}}</div>
+<label style="flex: 2 1 220px; min-width: 0; font-size: 13px; color: #4A5750">Role<input type="text" placeholder="Not agreed yet" style="display: block; width: 100%; margin-top: 6px; height: 44px; box-sizing: border-box; padding: 0 12px; border: 1px solid #B8C2BC; border-radius: 8px; font-size: 15px; font-family: inherit"></label>
+<label style="flex: 0 0 140px; font-size: 13px; color: #4A5750">Ownership %<input type="text" placeholder="Not agreed yet" style="display: block; width: 100%; margin-top: 6px; height: 44px; box-sizing: border-box; padding: 0 12px; border: 1px solid #B8C2BC; border-radius: 8px; font-size: 15px; font-family: inherit"></label>
+</div>
+</sc-for>
+</section>
+<section style="box-sizing: border-box; background: #FFFFFF; border: 1px solid #E3E7E3; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 8px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">Who can sign in</h2>
+<span style="font-size: 14px; color: #4A5750; padding-bottom: 8px">Every founder signs in with their own account and has full access to the dashboard, including the inbox.</span>
+<sc-for list="{{users}}" as="u" hint-placeholder-count="2">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px; padding: 12px 0; border-top: 1px solid #EEF1EE">
+<div style="display: flex; flex-direction: column; gap: 2px; padding-bottom: 8px">
+<span style="font-size: 15px; font-weight: 600">{{u.name}}</span>
+<span style="font-size: 13px; color: #4A5750">{{u.email}}</span>
+</div>
+<div style="display: flex; align-items: center; gap: 12px">
+<span style="padding: 4px 12px; border-radius: 999px; font-size: 13px; font-weight: 600; background: #DDF0E6; color: #14573F">Full access</span>
+<button type="button" style="height: 44px; padding: 0 16px; border: 1px solid #B8C2BC; border-radius: 8px; background: #FFFFFF; color: #8A2A1F; font-size: 14px; font-weight: 600; font-family: inherit">Remove access</button>
+</div>
+</div>
+</sc-for>
+</section>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1360,"height":900}}'>
+class Component extends DCLogic {
+renderVals() {
+return {
+people: [
+{ label: 'Founder 1' },
+{ label: 'Founder 2' },
+{ label: 'Founder 3' },
+{ label: 'Founder 4' }
+],
+users: [
+{ name: 'Founder name', email: 'name@example.com' },
+{ name: 'Founder name', email: 'name@example.com' }
+]
+};
+}
+}
+</script>
+</body>
+</html>
