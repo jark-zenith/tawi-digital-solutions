@@ -75,7 +75,7 @@ Database migrations are in `supabase/migrations/`. Core tables:
 - `founder_profiles`: private founder-submitted profiles and review status
 - `public_founders`: separately published public founder cards
 
-RLS is enabled on all exposed public tables. Anonymous visitors can read published services/public founder cards and submit enquiries, but cannot read private enquiries. Every authenticated user can read only their own profile; the overall admin can read the team roster for approvals. Only approved founder/admin roles can access internal records. The private staff/admin helper functions live in the non-exposed `app_private` schema.
+RLS is enabled on all exposed public tables. Anonymous visitors can read published services/public founder cards and submit enquiries, but cannot read private enquiries. Every authenticated user can read only their own profile; the overall admin can read the team roster for approvals. Only approved founder/admin roles can access internal records. The private staff/admin helper functions live in the non-exposed `app_private` schema; the role-management helper recognises only the exact primary administrator email.
 
 ## Current workspace functionality
 
