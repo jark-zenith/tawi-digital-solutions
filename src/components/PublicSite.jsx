@@ -228,12 +228,20 @@ function HomePage() {
   </>;
 }
 
+function PublicFounders() {
+  const [founders, setFounders] = useState([]);
+  useEffect(() => { if (!supabase) return; let active = true; supabase.from('public_founders').select('id,display_name,title,bio,skills,profile_photo_url').order('sort_order').then(({ data, error }) => { if (active && !error) setFounders(data || []); }); return () => { active = false; }; }, []);
+  if (!founders.length) return null;
+  return <section className="site-public-founders"><div className="site-public-founders-heading"><Eyebrow>THE PEOPLE BEHIND TAWI</Eyebrow><h2>Meet our <em>founding team.</em></h2><p>People bringing their skills, ideas and commitment to building TAWI.</p></div><div className="site-public-founders-grid">{founders.map(person => <article key={person.id}>{person.profile_photo_url ? <img src={person.profile_photo_url} alt={person.display_name} loading="lazy"/> : <span className="site-public-founder-avatar">{person.display_name?.slice(0,1)?.toUpperCase() || 'T'}</span>}<h3>{person.display_name}</h3>{person.title && <b>{person.title}</b>}{person.bio && <p>{person.bio}</p>}{person.skills?.length>0 && <div>{person.skills.map(skill => <small key={skill}>{skill}</small>)}</div>}</article>)}</div></section>;
+}
+
 function AboutPage() {
   return <main className="site-page">
     <section className="site-page-hero"><Eyebrow>ABOUT TAWI</Eyebrow><h1>A digital partner for <em>ideas worth building.</em></h1><p>We are a Kenya-based digital solutions agency helping individuals and businesses make better use of technology — wherever they are.</p></section>
     <section className="site-about-story"><div><span className="site-kicker">WHO WE ARE</span><h2>More than technology. <em>Solutions that make a difference.</em></h2></div><div><p>TAWI Digital Solutions combines client-facing digital services with the development of our own digital products. Our services span AI and automation, website and application development, digital transformation, and IT consulting and support.</p><p>We believe technology should be useful, understandable and shaped around the people who use it. That is why we begin by listening, understanding the challenge and identifying a practical way forward.</p><p>Our roots are in Kenya, and our work is open to clients and collaborators around the world.</p></div></section>
     <section className="site-mission-grid"><article><span>01 / OUR MISSION</span><h2>Make technology <em>work for people.</em></h2><p>To empower individuals and businesses through accessible, innovative and effective digital solutions.</p></article><article><span>02 / OUR VISION</span><h2>Help shape a more <em>connected future.</em></h2><p>To become a trusted digital solutions partner, contributing to a more connected, productive and technology-enabled future.</p></article></section>
     <section className="site-values"><div><Eyebrow>WHAT GUIDES US</Eyebrow><h2>Our values</h2></div><div className="site-values-list"><article><b>Purposeful innovation</b><p>We look for technology that addresses a real need.</p></article><article><b>Integrity and transparency</b><p>We communicate clearly and set honest expectations.</p></article><article><b>Quality and reliability</b><p>We care about thoughtful execution and dependable outcomes.</p></article><article><b>Continuous improvement</b><p>We keep learning, refining and finding better ways forward.</p></article></div></section>
+    <PublicFounders />
     <section className="site-page-cta"><div><h2>Let’s explore what technology can do for your idea.</h2><p>Tell us what you are planning and start a conversation with TAWI.</p></div><Link className="site-button" to="/contact">Start a conversation <ArrowRight size={16} /></Link></section>
   </main>;
 }
