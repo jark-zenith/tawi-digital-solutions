@@ -23,6 +23,11 @@ ALTER TABLE public.public_founders
 
 -- Remove the earlier broad staff policy: it allowed any founder/admin to alter account roles.
 DROP POLICY IF EXISTS "Staff manage profiles" ON public.profiles;
+DROP POLICY IF EXISTS "Users read own profile or staff reads all" ON public.profiles;
+DROP POLICY IF EXISTS "Users read own profile and admins read team" ON public.profiles;
+CREATE POLICY "Users read own profile and primary admin reads team"
+  ON public.profiles FOR SELECT TO authenticated
+  USING (id = (SELECT auth.uid()) OR (SELECT app_private.is_admin()));
 DROP POLICY IF EXISTS "Users update own basic profile" ON public.profiles;
 DROP POLICY IF EXISTS "Users update own profile and admins manage roles" ON public.profiles;
 DROP POLICY IF EXISTS "Users and staff update profiles" ON public.profiles;
