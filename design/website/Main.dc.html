@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tawi Digital Solutions</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#1F6F54}a:hover{color:#14463A}
+</style>
+</helmet>
+<div style="display: flex; flex-direction: column; min-height: 1300px; background: #FFFFFF; color: #14201C; font-family: 'Inter', system-ui, sans-serif">
+<header style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 48px; border-bottom: 1px solid #E3E7E3">
+<a href="Main.dc.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #14201C">
+<span style="width: 36px; height: 36px; border-radius: 8px; background: #1F6F54; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px">T</span>
+<span style="font-weight: 700; font-size: 16px">Tawi Digital Solutions</span>
+</a>
+<nav style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px">
+<a href="Main.dc.html" style="padding: 12px 14px; color: #14463A; font-weight: 600; font-size: 15px; text-decoration: none">Home</a>
+<a href="Services.dc.html" style="padding: 12px 14px; color: #3C4A44; font-weight: 500; font-size: 15px; text-decoration: none">Services</a>
+<a href="Team.dc.html" style="padding: 12px 14px; color: #3C4A44; font-weight: 500; font-size: 15px; text-decoration: none">Team</a>
+<a href="Request.dc.html" style="display: inline-block; padding: 12px 18px; border-radius: 8px; background: #1F6F54; color: #FFFFFF; font-weight: 600; font-size: 14px; text-decoration: none">Request details</a>
+</nav>
+</header>
+<section style="background: #F6F7F5; padding: 96px 48px 88px; display: flex; flex-direction: column; gap: 24px">
+<div style="max-width: 1080px; width: 100%; margin: 0 auto; display: flex; flex-direction: column; gap: 24px">
+<h1 style="margin: 0; max-width: 760px; font-size: 52px; line-height: 1.1; font-weight: 700">Practical digital solutions for your business.</h1>
+<p style="margin: 0; max-width: 620px; font-size: 20px; line-height: 1.5; color: #3C4A44">Tawi Digital Solutions helps businesses build and improve their digital presence, with services that are simple to start and easy to understand.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; padding-top: 8px">
+<a href="Services.dc.html" style="display: inline-block; padding: 16px 26px; border-radius: 8px; background: #1F6F54; color: #FFFFFF; font-weight: 600; font-size: 16px; text-decoration: none">See our services</a>
+<a href="Request.dc.html" style="display: inline-block; padding: 15px 25px; border-radius: 8px; border: 1px solid #8C9A92; background: #FFFFFF; color: #14201C; font-weight: 600; font-size: 16px; text-decoration: none">Request details</a>
+</div>
+</div>
+</section>
+<section style="padding: 72px 48px 40px">
+<div style="max-width: 1080px; width: 100%; margin: 0 auto; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px">
+<h2 style="margin: 0; font-size: 32px; font-weight: 700">What we offer</h2>
+<a href="Services.dc.html" style="font-size: 15px; font-weight: 600; color: #1F6F54; text-decoration: none; padding: 10px 0">View all services</a>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 20px">
+<sc-for list="{{offers}}" as="o" hint-placeholder-count="3">
+<div style="flex: 1 1 280px; min-width: 0; box-sizing: border-box; border: 1px solid #E3E7E3; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 10px">
+<h3 style="margin: 0; font-size: 20px; font-weight: 600">{{o.name}}</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.5; color: #3C4A44">{{o.note}}</p>
+<a href="Request.dc.html" style="margin-top: auto; padding: 12px 0; font-size: 15px; font-weight: 600; color: #1F6F54; text-decoration: none">Request details</a>
+</div>
+</sc-for>
+</div>
+</div>
+</section>
+<section style="padding: 40px 48px 72px">
+<div style="max-width: 1080px; width: 100%; margin: 0 auto; display: flex; flex-direction: column; gap: 28px">
+<h2 style="margin: 0; font-size: 32px; font-weight: 700">How it works</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 20px">
+<div style="flex: 1 1 240px; min-width: 0; box-sizing: border-box; background: #F6F7F5; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 14px; font-weight: 700; color: #1F6F54">Step 1</span>
+<h3 style="margin: 0; font-size: 18px; font-weight: 600">Choose a service</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.5; color: #3C4A44">Pick the service you are interested in.</p>
+</div>
+<div style="flex: 1 1 240px; min-width: 0; box-sizing: border-box; background: #F6F7F5; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 14px; font-weight: 700; color: #1F6F54">Step 2</span>
+<h3 style="margin: 0; font-size: 18px; font-weight: 600">Share your WhatsApp</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.5; color: #3C4A44">Leave your WhatsApp number and, if you like, your email.</p>
+</div>
+<div style="flex: 1 1 240px; min-width: 0; box-sizing: border-box; background: #F6F7F5; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 14px; font-weight: 700; color: #1F6F54">Step 3</span>
+<h3 style="margin: 0; font-size: 18px; font-weight: 600">We get in touch</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.5; color: #3C4A44">One of our team messages you with more details.</p>
+</div>
+</div>
+</div>
+</section>
+<section style="background: #1F6F54; padding: 56px 48px">
+<div style="max-width: 1080px; width: 100%; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px">
+<h2 style="margin: 0; font-size: 28px; font-weight: 700; color: #FFFFFF; max-width: 560px">Interested in a service? Tell us which one.</h2>
+<a href="Request.dc.html" style="display: inline-block; padding: 16px 26px; border-radius: 8px; background: #FFFFFF; color: #14463A; font-weight: 600; font-size: 16px; text-decoration: none">Request details</a>
+</div>
+</section>
+<footer style="margin-top: auto; background: #14201C; padding: 40px 48px; color: #C9D3CE">
+<div style="max-width: 1080px; width: 100%; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<span style="font-weight: 700; color: #FFFFFF">Tawi Digital Solutions</span>
+<span style="font-size: 14px">Practical digital solutions. Built together.</span>
+</div>
+<span style="font-size: 14px">hello@example.com</span>
+</div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1360,"height":1300}}'>
+class Component extends DCLogic {
+renderVals() {
+return {
+offers: [
+{ name: 'QR digital menus', note: 'Mobile-friendly menus for restaurants and hotels, opened with a QR code.' },
+{ name: 'Website development', note: 'Websites and landing pages for businesses and individuals.' },
+{ name: 'Digital business cards', note: 'QR-enabled digital profiles that make it easy to share your details.' }
+]
+};
+}
+}
+</script>
+</body>
+</html>
