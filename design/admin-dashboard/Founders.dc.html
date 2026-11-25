@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Founders</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#1F6F54}a:hover{color:#14463A}
+</style>
+</helmet>
+<div style="display: flex; flex-wrap: wrap; min-height: 960px; background: #F6F7F5; color: #14201C; font-family: 'Inter', system-ui, sans-serif">
+<nav style="flex: 0 0 232px; box-sizing: border-box; background: #FFFFFF; border-right: 1px solid #E3E7E3; padding: 24px 16px; display: flex; flex-direction: column; gap: 4px">
+<div style="display: flex; align-items: center; gap: 10px; padding: 0 8px 20px">
+<div style="width: 36px; height: 36px; border-radius: 8px; background: #1F6F54; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px">T</div>
+<div style="display: flex; flex-direction: column"><span style="font-weight: 700; font-size: 15px">Tawi</span><span style="font-size: 12px; color: #4A5750">Admin</span></div>
+</div>
+<a href="Main.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; color: #3C4A44; text-decoration: none; font-size: 15px; font-weight: 500">Dashboard</a>
+<a href="Inbox.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; color: #3C4A44; text-decoration: none; font-size: 15px; font-weight: 500">Inbox</a>
+<a href="Founders.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; background: #E4F0EA; color: #14463A; text-decoration: none; font-size: 15px; font-weight: 600">Founders</a>
+<a href="Services.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; color: #3C4A44; text-decoration: none; font-size: 15px; font-weight: 500">Services</a>
+<a href="Customers.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; color: #3C4A44; text-decoration: none; font-size: 15px; font-weight: 500">Customers</a>
+<a href="Settings.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; color: #3C4A44; text-decoration: none; font-size: 15px; font-weight: 500">Settings</a>
+</nav>
+<main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 32px 40px; display: flex; flex-direction: column; gap: 24px">
+<header style="display: flex; flex-direction: column; gap: 4px">
+<h1 style="margin: 0; font-size: 28px; font-weight: 700">Founders</h1>
+<span style="font-size: 15px; color: #4A5750">Invite founders, review what they submit, and choose what goes on the public team page.</span>
+</header>
+<section style="box-sizing: border-box; background: #FFFFFF; border: 1px solid #E3E7E3; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">Invite a founder</h2>
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px">
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 6px">
+<label for="invite-email" style="font-size: 14px; font-weight: 500">Email address</label>
+<input id="invite-email" type="email" placeholder="name@example.com" style="height: 44px; box-sizing: border-box; padding: 0 12px; border: 1px solid #8C9A92; border-radius: 8px; font-size: 15px; font-family: inherit">
+</div>
+<button type="button" style="height: 44px; padding: 0 20px; border: 0; border-radius: 8px; background: #1F6F54; color: #FFFFFF; font-size: 14px; font-weight: 600; font-family: inherit">Send invite</button>
+</div>
+</section>
+<section style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+<div style="flex: 3 1 420px; min-width: 0; box-sizing: border-box; background: #FFFFFF; border: 1px solid #E3E7E3; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 8px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 600; padding-bottom: 8px">Team</h2>
+<sc-for list="{{founders}}" as="f" hint-placeholder-count="4">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 0; border-top: 1px solid #EEF1EE">
+<div style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+<span style="font-size: 15px; font-weight: 600">{{f.name}}</span>
+<span style="font-size: 13px; color: #4A5750">{{f.email}} · {{f.role}}</span>
+</div>
+<div style="display: flex; align-items: center; gap: 12px">
+<span style="padding: 4px 12px; border-radius: 999px; font-size: 13px; font-weight: 600; background: {{f.bg}}; color: {{f.fg}}">{{f.status}}</span>
+<a href="Founders.dc.html" style="font-size: 14px; font-weight: 600; text-decoration: none; padding: 10px 4px">Review</a>
+</div>
+</div>
+</sc-for>
+</div>
+<div style="flex: 2 1 320px; min-width: 0; box-sizing: border-box; background: #FFFFFF; border: 1px solid #E3E7E3; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 8px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">Profile review</h2>
+<span style="font-size: 14px; color: #4A5750; padding-bottom: 8px">Tick what can appear on the public team page. Everything else stays private.</span>
+<sc-for list="{{fields}}" as="p" hint-placeholder-count="8">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 0; border-top: 1px solid #EEF1EE">
+<div style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+<span style="font-size: 13px; color: #4A5750">{{p.label}}</span>
+<span style="font-size: 15px">{{p.value}}</span>
+</div>
+<label style="display: flex; align-items: center; gap: 8px; font-size: 13px; min-height: 44px; flex: 0 0 auto"><input type="checkbox" checked="{{p.isPublic}}" style="width: 18px; height: 18px; margin: 0">Public</label>
+</div>
+</sc-for>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; padding-top: 12px">
+<button type="button" style="height: 44px; padding: 0 20px; border: 0; border-radius: 8px; background: #1F6F54; color: #FFFFFF; font-size: 14px; font-weight: 600; font-family: inherit">Approve profile</button>
+<button type="button" style="height: 44px; padding: 0 20px; border: 1px solid #8C9A92; border-radius: 8px; background: #FFFFFF; color: #14201C; font-size: 14px; font-weight: 600; font-family: inherit">Ask for changes</button>
+</div>
+</div>
+</section>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1360,"height":960}}'>
+class Component extends DCLogic {
+renderVals() {
+return {
+founders: [
+{ name: 'Founder name', email: 'name@example.com', role: 'Role not set', status: 'Approved', bg: '#DDF0E6', fg: '#14573F' },
+{ name: 'Founder name', email: 'name@example.com', role: 'Role not set', status: 'Profile submitted', bg: '#FFF1D6', fg: '#7A4B00' },
+{ name: 'Founder name', email: 'name@example.com', role: 'Role not set', status: 'Invited', bg: '#E4ECF8', fg: '#234A7D' },
+{ name: 'Founder name', email: 'name@example.com', role: 'Role not set', status: 'Not invited', bg: '#ECEEED', fg: '#3C4A44' }
+],
+fields: [
+{ label: 'Display name', value: 'Name shown on the site', isPublic: true },
+{ label: 'Photo', value: 'Uploaded photo', isPublic: true },
+{ label: 'Role or title', value: 'Role at Tawi', isPublic: true },
+{ label: 'Short bio', value: 'Two or three sentences', isPublic: true },
+{ label: 'Skills', value: 'Main skills', isPublic: true },
+{ label: 'Phone', value: 'Phone number', isPublic: false },
+{ label: 'Email', value: 'name@example.com', isPublic: false },
+{ label: 'Location', value: 'Town or city', isPublic: false },
+{ label: 'Experience', value: 'Past work and projects', isPublic: false },
+{ label: 'Availability', value: 'Hours per week', isPublic: false }
+]
+};
+}
+}
+</script>
+</body>
+</html>

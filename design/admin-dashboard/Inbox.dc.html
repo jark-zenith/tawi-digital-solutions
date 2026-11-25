@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Inbox</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#1F6F54}a:hover{color:#14463A}
+</style>
+</helmet>
+<div style="display: flex; flex-wrap: wrap; min-height: 980px; background: #F6F7F5; color: #14201C; font-family: 'Inter', system-ui, sans-serif">
+<nav style="flex: 0 0 232px; box-sizing: border-box; background: #FFFFFF; border-right: 1px solid #E3E7E3; padding: 24px 16px; display: flex; flex-direction: column; gap: 4px">
+<div style="display: flex; align-items: center; gap: 10px; padding: 0 8px 20px">
+<div style="width: 36px; height: 36px; border-radius: 8px; background: #1F6F54; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px">T</div>
+<div style="display: flex; flex-direction: column"><span style="font-weight: 700; font-size: 15px">Tawi</span><span style="font-size: 12px; color: #4A5750">Admin</span></div>
+</div>
+<a href="Main.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; color: #3C4A44; text-decoration: none; font-size: 15px; font-weight: 500">Dashboard</a>
+<a href="Inbox.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; background: #E4F0EA; color: #14463A; text-decoration: none; font-size: 15px; font-weight: 600">Inbox</a>
+<a href="Founders.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; color: #3C4A44; text-decoration: none; font-size: 15px; font-weight: 500">Founders</a>
+<a href="Services.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; color: #3C4A44; text-decoration: none; font-size: 15px; font-weight: 500">Services</a>
+<a href="Customers.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; color: #3C4A44; text-decoration: none; font-size: 15px; font-weight: 500">Customers</a>
+<a href="Settings.dc.html" style="display: block; padding: 12px 14px; border-radius: 8px; color: #3C4A44; text-decoration: none; font-size: 15px; font-weight: 500">Settings</a>
+</nav>
+<main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 32px 40px; display: flex; flex-direction: column; gap: 24px">
+<header style="display: flex; flex-direction: column; gap: 4px">
+<h1 style="margin: 0; font-size: 28px; font-weight: 700">Inbox</h1>
+<span style="font-size: 15px; color: #4A5750">Requests from the website. Every founder can see them, follow up on WhatsApp and decide who takes each one.</span>
+</header>
+<section style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{chips}}" as="c" hint-placeholder-count="5">
+<button type="button" onClick="{{c.onPick}}" style="height: 44px; padding: 0 16px; border-radius: 999px; font-size: 14px; font-weight: 600; font-family: inherit; border: 1px solid {{c.border}}; background: {{c.bg}}; color: {{c.fg}}">{{c.label}}</button>
+</sc-for>
+</section>
+<section style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+<div style="flex: 2 1 320px; min-width: 0; box-sizing: border-box; background: #FFFFFF; border: 1px solid #E3E7E3; border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 4px">
+<sc-for list="{{rows}}" as="r" hint-placeholder-count="5">
+<button type="button" onClick="{{r.onPick}}" style="width: 100%; box-sizing: border-box; text-align: left; font-family: inherit; color: #14201C; cursor: pointer; padding: 14px; border-radius: 10px; border: 1px solid {{r.border}}; background: {{r.bg}}; display: flex; flex-direction: column; gap: 6px">
+<span style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+<span style="font-size: 15px; font-weight: 600">{{r.name}}</span>
+<span style="padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; background: {{r.pillBg}}; color: {{r.pillFg}}">{{r.status}}</span>
+</span>
+<span style="font-size: 14px">{{r.service}}</span>
+<span style="font-size: 13px; color: #4A5750">{{r.when}} · {{r.assigned}}</span>
+</button>
+</sc-for>
+<sc-if value="{{isEmpty}}" hint-placeholder-val="{{ false }}">
+<span style="font-size: 15px; color: #4A5750; padding: 16px">No inquiries here.</span>
+</sc-if>
+</div>
+<div style="flex: 3 1 380px; min-width: 0; box-sizing: border-box; background: #FFFFFF; border: 1px solid #E3E7E3; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+<h2 style="margin: 0; font-size: 20px; font-weight: 600">{{cur.name}}</h2>
+<a href="#" style="display: inline-block; padding: 12px 18px; border-radius: 8px; background: #1F6F54; color: #FFFFFF; font-weight: 600; font-size: 14px; text-decoration: none">Message on WhatsApp</a>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
+<div style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 13px; color: #4A5750">WhatsApp</span><span style="font-size: 15px">{{cur.whatsapp}}</span></div>
+<div style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 13px; color: #4A5750">Email</span><span style="font-size: 15px">{{cur.email}}</span></div>
+<div style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 13px; color: #4A5750">Service requested</span><span style="font-size: 15px">{{cur.service}}</span></div>
+<div style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 13px; color: #4A5750">Received</span><span style="font-size: 15px">{{cur.when}}</span></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px; padding: 14px; background: #F6F7F5; border-radius: 10px"><span style="font-size: 13px; color: #4A5750">Message</span><span style="font-size: 15px">{{cur.message}}</span></div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
+<label style="flex: 1 1 180px; font-size: 13px; color: #4A5750">Status<select value="{{cur.status}}" onChange="{{onStatus}}" style="display: block; width: 100%; margin-top: 6px; height: 44px; box-sizing: border-box; padding: 0 10px; border: 1px solid #B8C2BC; border-radius: 8px; font-size: 15px; font-family: inherit; background: #FFFFFF; color: #14201C">
+<option value="New">New</option>
+<option value="Contacted">Contacted</option>
+<option value="In progress">In progress</option>
+<option value="Closed">Closed</option>
+</select></label>
+<label style="flex: 1 1 180px; font-size: 13px; color: #4A5750">Who takes this service<select value="{{cur.assigned}}" onChange="{{onAssign}}" style="display: block; width: 100%; margin-top: 6px; height: 44px; box-sizing: border-box; padding: 0 10px; border: 1px solid #B8C2BC; border-radius: 8px; font-size: 15px; font-family: inherit; background: #FFFFFF; color: #14201C">
+<option value="Unassigned">Unassigned</option>
+<option value="Founder 1">Founder 1</option>
+<option value="Founder 2">Founder 2</option>
+<option value="Founder 3">Founder 3</option>
+<option value="Founder 4">Founder 4</option>
+</select></label>
+</div>
+<label style="font-size: 13px; color: #4A5750">Follow-up notes<textarea rows="4" value="{{cur.notes}}" onInput="{{onNotes}}" placeholder="What was agreed, next steps, price discussed..." style="display: block; width: 100%; margin-top: 6px; box-sizing: border-box; padding: 10px 12px; border: 1px solid #B8C2BC; border-radius: 8px; font-size: 15px; font-family: inherit; color: #14201C; resize: vertical"></textarea></label>
+<span style="font-size: 13px; color: #4A5750">Every inquiry is saved to the database, so the whole team sees the same record.</span>
+</div>
+</section>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1360,"height":980}}'>
+class Component extends DCLogic {
+constructor(...args) {
+super(...args);
+this.state = {
+filter: 'All',
+selectedId: 1,
+items: [
+{ id: 1, name: 'Customer name', whatsapp: '+000 000 000 000', email: 'Not given', service: 'QR digital menus', when: 'Today, 10:42', message: 'Asked for more details about this service.', status: 'New', assigned: 'Unassigned', notes: '' },
+{ id: 2, name: 'Customer name', whatsapp: '+000 000 000 000', email: 'name@example.com', service: 'Website development', when: 'Today, 09:15', message: 'Asked for more details about this service.', status: 'New', assigned: 'Unassigned', notes: '' },
+{ id: 3, name: 'Customer name', whatsapp: '+000 000 000 000', email: 'Not given', service: 'Digital business cards', when: 'Yesterday', message: 'Asked for more details about this service.', status: 'Contacted', assigned: 'Founder 2', notes: '' },
+{ id: 4, name: 'Customer name', whatsapp: '+000 000 000 000', email: 'Not given', service: 'AI-assisted business solutions', when: '2 days ago', message: 'Asked for more details about this service.', status: 'In progress', assigned: 'Founder 1', notes: '' },
+{ id: 5, name: 'Customer name', whatsapp: '+000 000 000 000', email: 'Not given', service: 'Promotional video and content', when: 'Last week', message: 'Asked for more details about this service.', status: 'Closed', assigned: 'Founder 3', notes: '' }
+]
+};
+}
+patch(key, value) {
+const id = this.state.selectedId;
+this.setState({ items: this.state.items.map((x) => (x.id === id ? { ...x, [key]: value } : x)) });
+}
+renderVals() {
+const items = this.state.items;
+const filter = this.state.filter;
+const colors = {
+'New': ['#DDF0E6', '#14573F'],
+'Contacted': ['#E4ECF8', '#234A7D'],
+'In progress': ['#FFF1D6', '#7A4B00'],
+'Closed': ['#ECEEED', '#3C4A44']
+};
+const visible = items.filter((x) => filter === 'All' || x.status === filter);
+const cur = items.find((x) => x.id === this.state.selectedId) || items[0];
+return {
+chips: ['All', 'New', 'Contacted', 'In progress', 'Closed'].map((f) => {
+const n = items.filter((x) => f === 'All' || x.status === f).length;
+const on = f === filter;
+return {
+label: f + ' (' + n + ')',
+bg: on ? '#1F6F54' : '#FFFFFF',
+fg: on ? '#FFFFFF' : '#14201C',
+border: on ? '#1F6F54' : '#B8C2BC',
+onPick: () => this.setState({ filter: f })
+};
+}),
+rows: visible.map((x) => ({
+name: x.name,
+service: x.service,
+when: x.when,
+status: x.status,
+assigned: x.assigned,
+pillBg: colors[x.status][0],
+pillFg: colors[x.status][1],
+bg: x.id === cur.id ? '#E4F0EA' : '#FFFFFF',
+border: x.id === cur.id ? '#1F6F54' : '#E3E7E3',
+onPick: () => this.setState({ selectedId: x.id })
+})),
+isEmpty: visible.length === 0,
+cur: cur,
+onStatus: (e) => this.patch('status', e.target.value),
+onAssign: (e) => this.patch('assigned', e.target.value),
+onNotes: (e) => this.patch('notes', e.target.value)
+};
+}
+}
+</script>
+</body>
+</html>
