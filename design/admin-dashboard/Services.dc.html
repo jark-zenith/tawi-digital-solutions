@@ -30,7 +30,7 @@ a{color:#1F6F54}a:hover{color:#14463A}
 <main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 32px 40px; display: flex; flex-direction: column; gap: 24px">
 <header style="display: flex; flex-direction: column; gap: 4px">
 <h1 style="margin: 0; font-size: 28px; font-weight: 700">Services</h1>
-<span style="font-size: 15px; color: #4A5750">The list of what Tawi offers. Add, rename, change the status or remove any service.</span>
+<span style="font-size: 15px; color: #4A5750">The list of what Tawi offers. Add, rename, change the status or remove any service. Only services ticked "Show on website" appear on the public site.</span>
 </header>
 <section style="box-sizing: border-box; background: #FFFFFF; border: 1px solid #E3E7E3; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Add a service</h2>
@@ -61,6 +61,7 @@ a{color:#1F6F54}a:hover{color:#14463A}
 <option value="Paused">Paused</option>
 </select></label>
 </div>
+<label style="display: flex; align-items: center; gap: 8px; min-height: 44px; font-size: 14px"><input type="checkbox" checked="{{s.show}}" onChange="{{s.onShow}}" style="width: 18px; height: 18px; margin: 0">Show on website</label>
 <button type="button" onClick="{{s.onRemove}}" aria-label="Remove service" style="height: 44px; padding: 0 16px; border: 1px solid #B8C2BC; border-radius: 8px; background: #FFFFFF; color: #8A2A1F; font-size: 14px; font-weight: 600; font-family: inherit">Remove</button>
 </div>
 </sc-for>
@@ -105,6 +106,8 @@ rows: list.map((s, i) => ({
 name: s.name,
 note: s.note,
 status: s.status,
+show: !!s.show,
+onShow: (e) => this.change(i, 'show', e.target.checked),
 onName: (e) => this.change(i, 'name', e.target.value),
 onNote: (e) => this.change(i, 'note', e.target.value),
 onStatus: (e) => this.change(i, 'status', e.target.value),

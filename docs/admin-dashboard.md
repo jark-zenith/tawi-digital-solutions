@@ -16,7 +16,7 @@ This document describes the proposed admin dashboard for the Tawi Digital Soluti
 | Dashboard | Overview: founder count, approved profiles, services, customers, new inquiries, to-do list and latest inquiries. |
 | Inbox | Customer inquiries from the website. Filter by status, open WhatsApp, set status, assign a founder, add follow-up notes. |
 | Founders | Invite founders by email, see each founder's status, review submitted profiles and tick which fields may appear on the public team page. |
-| Services | The list of services. Add, rename, describe, change status (Idea, Demo, Pilot, Live, Paused) or remove. |
+| Services | The list of services. Add, rename, describe, change status (Idea, Demo, Pilot, Live, Paused) or remove. A "Show on website" switch controls which services appear on the public site. |
 | Customers | Pipeline of businesses by stage: Lead, Contacted, Pilot, Customer, with a details form. |
 | Settings | Company details, who can sign in, and a record of agreed roles and ownership. |
 
