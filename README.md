@@ -42,58 +42,28 @@ The project publishable key is intentionally used in the browser. **Never put a 
 
 ## Founder and admin accounts
 
-Team account registration is available at:
+Team registration: https://tawi-digital-solutions.onrender.com/admin/signup
 
-https://tawi-digital-solutions.onrender.com/admin/signup
-
-1. A founder/admin opens the registration URL and enters their name, email and password.
-2. Supabase Auth creates the account. The password is managed by Supabase Auth; it is not saved in the public website tables.
-3. The database trigger `public.handle_new_user()` creates the associated `public.profiles` row with the safe default role `member`.
-4. If email confirmation is enabled in Supabase Auth, the user must confirm their email before signing in.
-5. A current administrator approves the account by assigning the appropriate `founder` or `admin` role in the Supabase SQL Editor.
-6. The new team member returns to `/admin/login` and signs in with the same email and password. Their access is checked against the database profile role on every workspace entry.
-
-**Important:** Registration does not automatically grant workspace privileges. This prevents anyone who finds the public registration URL from becoming an administrator or accessing private customer/founder records.
+- **Overall administrator:** `jarkpruden@gmail.com`. This exact email is assigned the `admin` role by the database signup trigger. Register with this email and create your own private password; after confirming your email, sign in at `/admin/login` and open `/admin`.
+- **All other registrations:** Supabase Auth stores each person's own email/password account, and `public.handle_new_user()` creates a `public.profiles` row with role `member`. A member has no workspace access while awaiting approval.
+- **Approval:** The overall administrator opens the **Team** tab in `/admin`, reviews each registration, and selects **Approve founder** or **Grant admin**. The same screen can revoke privileged access. The overall administrator's own account is protected from self-demotion in the UI.
+- **Role security:** Role updates are enforced by RLS; only an account whose database role is `admin` can grant or revoke `founder`/`admin` roles. A founder can use the workspace but cannot approve other users. Signup metadata cannot grant privileged access.
+- **Passwords:** Each person creates and manages their own password through Supabase Auth. TAWI administrators must never collect or share passwords. Email confirmation is enabled, so users must confirm their email before signing in.
 
 ### Supabase Auth URL configuration
 
-In Supabase Dashboard → Authentication → URL Configuration, set:
+The connected Supabase project is configured with:
 
 - **Site URL:** `https://tawi-digital-solutions.onrender.com`
-- **Redirect URL allowlist:** add `https://tawi-digital-solutions.onrender.com/admin/login`
-- For local testing, optionally add `http://localhost:5173/admin/login`
+- **Redirect allowlist:** `https://tawi-digital-solutions.onrender.com/admin/login` and `http://localhost:5173/admin/login` for local development
+- **Email/password sign-up:** enabled
+- **Email confirmation:** enabled (users must confirm their address)
 
-Enable email/password sign-in. If email confirmation is enabled, configure the Supabase confirmation email template and SMTP delivery so founders receive the verification link. The website sends the production `/admin/login` URL as the signup redirect.
+The signup page sends the current origin's `/admin/login` URL as its confirmation redirect.
 
-### Bootstrap the first administrator
+### Database migration
 
-The initial administrator must register at the signup page and confirm their email first. Then run this SQL in the Project Teravex SQL Editor, using the exact verified email:
-
-```sql
-update public.profiles
-set role = 'admin', updated_at = now()
-where lower(email) = lower('jarkpruden@gmail.com');
-```
-
-Verify that exactly one profile was updated. If the account does not yet exist, the person must complete registration and email confirmation first. Do not share passwords or ask users to send them to an administrator.
-
-### Approve additional founders or administrators
-
-After each person registers and confirms their email, approve only their exact email address:
-
-```sql
--- Founder access
-update public.profiles
-set role = 'founder', updated_at = now()
-where lower(email) = lower('founder@example.com');
-
--- Administrator access (only for a trusted administrator)
-update public.profiles
-set role = 'admin', updated_at = now()
-where lower(email) = lower('admin@example.com');
-```
-
-Check the affected row count and profile email before granting access. A founder/admin should sign out and sign in again after their role is changed.
+`supabase/migrations/20261125140000_bootstrap_admin_and_admin_only_role_changes.sql` records the production migration that bootstraps the exact overall administrator email and restricts profile role changes to admins. It is applied to the connected Project Teravex Supabase database.
 
 ## Data model and access control
 
@@ -112,6 +82,7 @@ RLS is enabled on all exposed public tables. Anonymous visitors can read publish
 - Public home, services, team and request-details pages
 - Supabase-backed customer enquiry submission
 - Email/password team registration and sign-in
+- Administrator-only team approvals with founder/admin promotion and access revocation
 - Protected workspace with overview, live enquiry counts, enquiry status updates and CSV export
 - Services catalogue and founder-profile overview
 - Responsive blue/silver glass workspace with dark/light theme
@@ -135,6 +106,7 @@ Render automatically deploys successful changes merged to `main`. Set `VITE_SUPA
 
 - Never expose service-role/secret keys in the browser.
 - Never promote a user based on editable signup metadata.
-- Keep new accounts at the default `member` role until approved.
+- Keep every non-owner registration at the default `member` role until the overall administrator approves it.
+- The only automatic admin bootstrap is the exact address `jarkpruden@gmail.com`; do not broaden this rule to a domain or user-editable metadata.
 - Use unique passwords and email confirmation; never collect passwords in chat, email, or founder spreadsheets.
 - Review Supabase RLS policies before adding new tables or data access.
