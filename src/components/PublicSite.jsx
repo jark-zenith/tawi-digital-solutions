@@ -50,6 +50,12 @@ const services = [
   }
 ];
 
+const products = [
+  { id: 'menus', title: 'QR Digital Menus', label: 'PRODUCT IN DEVELOPMENT', description: 'Give customers a simple way to browse your menu, explore what you offer and connect with your business.', icon: Layers3 },
+  { id: 'websites', title: 'Business Website Starter', label: 'PRODUCT DIRECTION', description: 'A focused website foundation for small businesses that need a clear online presence and a reliable way to receive enquiries.', icon: Code2 },
+  { id: 'tools', title: 'Digital Business Tools', label: 'PRODUCT EXPLORATION', description: 'Practical web tools designed to simplify everyday customer interactions and business workflows.', icon: Sparkles }
+];
+
 const steps = [
   ['01', 'Understand', 'We listen to your goals, challenges and the people your solution needs to serve.'],
   ['02', 'Plan', 'We define the scope, explore suitable options and agree on a practical way forward.'],
@@ -79,6 +85,7 @@ function Header() {
       </button>
       <nav className={open ? 'site-nav open' : 'site-nav'}>
         {items.map(([label, path, end]) => <NavLink key={path} to={path} end={!!end} onClick={() => setOpen(false)} className={({ isActive }) => 'site-nav-link' + (isActive ? ' active' : '')}>{label}</NavLink>)}
+        <a className="site-nav-link" href="/#products" onClick={() => setOpen(false)}>Products</a>
         <Link className="site-button site-button-small" to="/contact" onClick={() => setOpen(false)}>Start a project <ArrowUpRight size={15} /></Link>
       </nav>
     </div>
@@ -145,7 +152,7 @@ function HomePage() {
         <div className="site-hero-copy">
           <Eyebrow>KENYA-BASED · WORKING GLOBALLY</Eyebrow>
           <h1>Technology that moves <em>your ideas forward.</em></h1>
-          <p className="site-hero-lead">We help individuals and businesses turn ideas into practical digital solutions through AI, software development, digital transformation and technology support.</p>
+          <p className="site-hero-lead">We help individuals and businesses move forward with digital services, while developing practical products of our own — from business tools to focused software experiences.</p>
           <div className="site-actions">
             <Link className="site-button" to="/contact">Start a project <ArrowRight size={17} /></Link>
             <Link className="site-button site-button-outline" to="/services">Explore our services</Link>
@@ -168,10 +175,22 @@ function HomePage() {
 
     <section className="site-section site-services-section">
       <div className="site-section-heading">
-        <div><Eyebrow>WHAT WE DO</Eyebrow><h2>One agency. <em>Four ways to move forward.</em></h2><p>We bring different areas of technology together to help you solve problems and make progress.</p></div>
+        <div><Eyebrow>WHAT WE DO</Eyebrow><h2>Services for today. <em>Products for what’s next.</em></h2><p>Work with us on a digital project, or explore the tools and products we are developing for everyday business needs.</p></div>
         <Link to="/services" className="site-text-link">View all services <ArrowRight size={16} /></Link>
       </div>
       <div className="site-service-grid">{services.map((item, index) => <ServiceCard key={item.id} item={item} index={index} />)}</div>
+    </section>
+
+    <section className="site-section site-products-section" id="products">
+      <div className="site-section-heading">
+        <div><Eyebrow>THE TAWI PRODUCT STUDIO</Eyebrow><h2>Useful tools. <em>Built around real business needs.</em></h2><p>Alongside client projects, we are shaping a growing range of focused digital products. Some are in development and others are still being explored.</p></div>
+      </div>
+      <div className="site-product-grid">{products.map((product, index) => { const Icon = product.icon; return <article className="site-product-card" key={product.id}>
+        <div className="site-product-card-top"><span className="site-product-icon"><Icon size={21} /></span><span className="site-product-index">0{index + 1}</span></div>
+        <span className="site-product-status">{product.label}</span>
+        <h3>{product.title}</h3><p>{product.description}</p>
+        <Link to="/contact" className="site-text-link">Discuss this product <ArrowUpRight size={15} /></Link>
+      </article>; })}</div>
     </section>
 
     <section className="site-about-band">
@@ -179,7 +198,7 @@ function HomePage() {
       <div className="site-about-copy">
         <Eyebrow>ABOUT TAWI</Eyebrow>
         <h2>Good technology starts with <em>understanding people.</em></h2>
-        <p>TAWI Digital Solutions is a Kenya-based digital agency working with individuals, entrepreneurs and businesses locally and internationally. We combine creative thinking and practical technology to build solutions around real needs.</p>
+        <p>TAWI Digital Solutions is a Kenya-based hybrid technology company. We work with individuals and businesses on digital projects while developing our own products to address practical needs. Our focus is useful technology, clear communication and thoughtful execution.</p>
         <Link to="/about" className="site-text-link">Get to know TAWI <ArrowRight size={16} /></Link>
       </div>
     </section>
@@ -212,7 +231,7 @@ function HomePage() {
 function AboutPage() {
   return <main className="site-page">
     <section className="site-page-hero"><Eyebrow>ABOUT TAWI</Eyebrow><h1>A digital partner for <em>ideas worth building.</em></h1><p>We are a Kenya-based digital solutions agency helping individuals and businesses make better use of technology — wherever they are.</p></section>
-    <section className="site-about-story"><div><span className="site-kicker">WHO WE ARE</span><h2>More than technology. <em>Solutions that make a difference.</em></h2></div><div><p>TAWI Digital Solutions brings together AI and automation, website and application development, digital transformation, and IT consulting and support.</p><p>We believe technology should be useful, understandable and shaped around the people who use it. That is why we begin by listening, understanding the challenge and identifying a practical way forward.</p><p>Our roots are in Kenya, and our work is open to clients and collaborators around the world.</p></div></section>
+    <section className="site-about-story"><div><span className="site-kicker">WHO WE ARE</span><h2>More than technology. <em>Solutions that make a difference.</em></h2></div><div><p>TAWI Digital Solutions combines client-facing digital services with the development of our own digital products. Our services span AI and automation, website and application development, digital transformation, and IT consulting and support.</p><p>We believe technology should be useful, understandable and shaped around the people who use it. That is why we begin by listening, understanding the challenge and identifying a practical way forward.</p><p>Our roots are in Kenya, and our work is open to clients and collaborators around the world.</p></div></section>
     <section className="site-mission-grid"><article><span>01 / OUR MISSION</span><h2>Make technology <em>work for people.</em></h2><p>To empower individuals and businesses through accessible, innovative and effective digital solutions.</p></article><article><span>02 / OUR VISION</span><h2>Help shape a more <em>connected future.</em></h2><p>To become a trusted digital solutions partner, contributing to a more connected, productive and technology-enabled future.</p></article></section>
     <section className="site-values"><div><Eyebrow>WHAT GUIDES US</Eyebrow><h2>Our values</h2></div><div className="site-values-list"><article><b>Purposeful innovation</b><p>We look for technology that addresses a real need.</p></article><article><b>Integrity and transparency</b><p>We communicate clearly and set honest expectations.</p></article><article><b>Quality and reliability</b><p>We care about thoughtful execution and dependable outcomes.</p></article><article><b>Continuous improvement</b><p>We keep learning, refining and finding better ways forward.</p></article></div></section>
     <section className="site-page-cta"><div><h2>Let’s explore what technology can do for your idea.</h2><p>Tell us what you are planning and start a conversation with TAWI.</p></div><Link className="site-button" to="/contact">Start a conversation <ArrowRight size={16} /></Link></section>
